@@ -11,6 +11,8 @@ export function measureTime(fn: () => void) {
   return end - start;
 }
 
+
+// ! 좀 더 다듬을 필요 있음
 export function mergeOptions(defaultOptions: any, options: any) {
   return { ...defaultOptions, ...options };
 }

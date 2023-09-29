@@ -1,17 +1,21 @@
 {
   "name": "@woo/fetch",
   "version": "0.0.1",
+  "keywords": [],
+  "author": "Park chang woo",
+  "license": "ISC",
   "description": "",
   "main": "index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist"
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
