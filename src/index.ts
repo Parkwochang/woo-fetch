@@ -2,7 +2,7 @@ import NextFetch from "./core/WooFetch";
 
 interface CreateProps {
   baseUrl: string;
-  timeOut?: number;
+  timeout?: number;
   header?: any;
 }
 
@@ -29,5 +29,3 @@ function CreateInstance(config: typeof defaultConfig) {
 const nextFetch = CreateInstance(defaultConfig);
 
 export default nextFetch;
-
-//! 자동완성과 타입 추론을 못하는 에러 발생

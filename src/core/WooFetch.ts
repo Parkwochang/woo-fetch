@@ -1,4 +1,3 @@
-// import { measureTime } from '@utils/formatting';
 import Interceptor from './interceptor';
 import { transformPrams } from './utils';
 
@@ -39,6 +38,7 @@ export default class NextFetch {
 
   //! 타입 추론 때문에 한번에 붙여야할 필요있다. 어차피 함수로 호출하나 똑같은 것 같다. 
   public create(config: CreateProps) {
+    // const signal = config.timeOut ?  
 
     return new NextFetch({ ...this.defaults, ...config });
   }
@@ -48,12 +48,8 @@ export default class NextFetch {
     const new_url = new URL(`${this.defaults.baseUrl}${url}`);
 
     if (option?.params) {
-      // ! 반복문 돌릴지 고민 const queryString = new URLSearchParams(option?.params).toString();
-      console.log(
-        // measureTime(() => {
-        transformPrams(new_url, option.params)
-        // }),
-      );
+      // ! 반복문 돌릴지 고민 const queryString = new URLSearchParams(option?.params).toString();      
+      transformPrams(new_url, option.params)
       delete option.params;
     }
 
