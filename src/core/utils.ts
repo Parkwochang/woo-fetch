@@ -16,3 +16,5 @@ export function measureTime(fn: () => void) {
 export function mergeOptions(defaultOptions: any, options: any) {
   return { ...defaultOptions, ...options };
 }
+
+//! 클래스 의존도를 함수로 변경 계획 
