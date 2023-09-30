@@ -27,4 +27,13 @@ export class Adapter {
   }
 }
 
+export function fetchAdapter(url: string, fetchOptions: IFetchOptions) {
+
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      // ...optionsInit,
+    })
+  })
+}
+
 // ! 현재 필요한 것  request, reponse, error, retry, timeout
