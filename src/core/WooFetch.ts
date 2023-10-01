@@ -1,3 +1,4 @@
+import { fetchAdapter } from './adapter';
 import Interceptor from './interceptor';
 import { transformPrams } from './utils';
 
@@ -9,44 +10,41 @@ interface FetchOption {
   next?: { revalidate: number };
 }
 
-export interface IFetchOptions {
-  method: string;
-  body?: object;
-  params?: object;
-  query?: object;
-  headers?: HeadersInit;
-}
-
 interface CreateProps {
   baseUrl: string;
-  timeOut?: number;
-  header?: any;
+  timeout?: number;
+  header?: RequestInit['headers'];
 }
 
 export default class NextFetch {
   public interceptors;
   private defaults;
 
+  // instanceConfig -> param, body 같은 값 제외하고 header 등의 정의 필요 
   constructor(instanceConfig: any) {
     this.defaults = instanceConfig;
     this.interceptors = {
       request: new Interceptor(),
       response: new Interceptor(),
     };
-    // this.create = (config: CreateProps) => new NextFetch({ ...instanceConfig, ...config });
   }
 
-  //! 타입 추론 때문에 한번에 붙여야할 필요있다. 어차피 함수로 호출하나 똑같은 것 같다. 
-  public create(config: CreateProps) {
-    // const signal = config.timeOut ?  
+  public create(config: CreateProps): NextFetch {
+    const initOptions = {
+      ...this.defaults,
+      signal: AbortSignal.timeout(config.timeout || 8000),
+      baseUrl: config.baseUrl || '',
+      ...config.header,
+    }
 
-    return new NextFetch({ ...this.defaults, ...config });
+    return new NextFetch({ ...initOptions });
   }
 
 
-  public async get(url: string, { ...option }: FetchOption) {
+  public async get<T>(url: string, { ...option }: FetchOption): Promise<T> {
     const new_url = new URL(`${this.defaults.baseUrl}${url}`);
 
+    // ! 객체에 대한 불변 처리 필요 
     if (option?.params) {
       // ! 반복문 돌릴지 고민 const queryString = new URLSearchParams(option?.params).toString();      
       transformPrams(new_url, option.params)
@@ -56,9 +54,10 @@ export default class NextFetch {
     const data = await fetch(new_url, { method: 'GET', ...this.defaults, ...option })
       .then(res => {
         if (res.status >= 400) {
+          // ! 에러에 대한 확실한 알림 필요 
           throw new Error();
         }
-
+        // ! 인터셉터에 대한 분기 처리 필요 
         if (this.interceptors.response.handlers[0].fulfilled) {
           this.interceptors.response.handlers[0].fulfilled(res);
         }
@@ -78,7 +77,6 @@ export default class NextFetch {
   public async post(url: string, option?: FetchOption) {
     const new_url = new URL(`${this.defaults.baseUrl}${url}`);
 
-    const data = await (await fetch(new_url, { method: 'POST', ...option })).json();
-    return data;
+    return await fetchAdapter(new_url, { method: 'POST', ...this.defaults, ...option })
   }
 }
