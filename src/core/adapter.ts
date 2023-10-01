@@ -1,19 +1,18 @@
 export interface IFetchOptions {
-  method: string;
+  method: 'get' | 'post' | 'put' | 'delete';
   body?: BodyInit;
   headers?: HeadersInit;
   cache?: 'force-cache' | 'no-store' | 'no-cache';
   next?: { revalidate: number };
-  retry?: number;
-  timeout?: number;
+  retry?: number; // ! retry 로직 구현 필요
+  timeout?: number; // ! timeout -> signal 
 }
 
 export class Adapter {
-  static async fetch<T>(url: string, fetchOptions: IFetchOptions) {
+  static async fetch<T>(url: string, fetchOptions: IFetchOptions): Promise<T> {
     if (fetchOptions.retry) {
       // ! retry 로직 구현 필요 -> timeout과 연계 필요 
     }
-
     const optionsInit = {
       ...fetchOptions,
       headers: { ...fetchOptions.headers }
@@ -27,11 +26,12 @@ export class Adapter {
   }
 }
 
-export function fetchAdapter(url: string, fetchOptions: IFetchOptions) {
+export function fetchAdapter(url: URL, fetchOptions: IFetchOptions) {
+
 
   return new Promise((resolve, reject) => {
     fetch(url, {
-      // ...optionsInit,
+      ...fetchOptions,
     })
   })
 }
