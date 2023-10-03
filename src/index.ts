@@ -19,10 +19,6 @@ const defaultConfig = {
 function CreateInstance(config: typeof defaultConfig) {
   const instance = new NextFetch(config);
 
-  // instance.create = (instanceConfig: CreateProps): NextFetch => {
-  //   return CreateInstance({ ...config, ...instanceConfig });
-  // };
-
   return instance;
 }
 
