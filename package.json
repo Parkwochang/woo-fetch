@@ -1,23 +1,37 @@
 {
-  "name": "@woo/fetch",
-  "version": "0.0.1",
-  "keywords": [],
-  "author": "Park chang woo",
+  "name": "woo-fetch",
+  "version": "0.0.0",
+  "author": "Park chang woo <water9707@gmail.com>",
   "license": "ISC",
-  "description": "",
-  "main": "index.js",
+  "description": "### nextjs v13 이후 axios의 사용이 client에서만 사용하는 불편함을 개선하기 위해 만들었습니다.",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "./dist/**/*"
+  ],
   "exports": {
     ".": "./dist"
+  },
+  "publishConfig": {
+    "parkwochang:registry": "https://github.com/Parkwochang/woo-fetch.git"
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parkwochang/woo-fetch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Parkwochang/woo-fetch/issues"
+  },
+  "homepage": "https://github.com/Parkwochang/woo-fetch#readme"
 }
