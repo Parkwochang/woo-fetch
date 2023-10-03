@@ -40,11 +40,10 @@ export default class NextFetch {
     return new NextFetch({ ...initOptions });
   }
 
-
   public async get<T>(url: string, { ...option }: FetchOption): Promise<T> {
     const new_url = new URL(`${this.defaults.baseUrl}${url}`);
 
-    // ! 객체에 대한 불변 처리 필요 
+    // ! 객체에 대한 불변 처리 필요 -> delete 보다 새로운 객체를 생성 
     if (option?.params) {
       // ! 반복문 돌릴지 고민 const queryString = new URLSearchParams(option?.params).toString();      
       transformPrams(new_url, option.params)
