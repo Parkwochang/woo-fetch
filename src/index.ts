@@ -13,7 +13,7 @@ const defaultConfig = {
     'Content-Type': 'application/json',
   },
   //! AbortSignal.timeout 에러 있을 수 있으므로 timeout 감싼 new AbortController().signal 로 처리
-  signal: AbortSignal.timeout(8000),
+  // signal: AbortSignal.timeout(8000), -> 가끔 에러 생김 
 };
 
 function CreateInstance(config: typeof defaultConfig) {
