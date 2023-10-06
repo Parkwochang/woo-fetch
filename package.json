@@ -5,13 +5,20 @@
   "license": "ISC",
   "description": "### nextjs v13 이후 axios의 사용이 client에서만 사용하는 불편함을 개선하기 위해 만들었습니다.",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "./dist/**/*"
   ],
-  "exports": {
-    ".": "./dist"
-  },
+  "keywords": [
+    "axios",
+    "fetch",
+    "nextjs",
+    "woxios"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
   "publishConfig": {
     "parkwochang:registry": "https://github.com/Parkwochang/woo-fetch.git"
   },
@@ -23,6 +30,7 @@
     "prepare": "npm run build"
   },
   "devDependencies": {
+    "@types/node": "^20.8.2",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
