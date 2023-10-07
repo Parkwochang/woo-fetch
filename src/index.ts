@@ -22,6 +22,4 @@ function CreateInstance(config: typeof defaultConfig) {
   return instance;
 }
 
-export const nextFetch = CreateInstance(defaultConfig);
-
-export default nextFetch;
+export const woxios = CreateInstance(defaultConfig);
