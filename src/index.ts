@@ -22,4 +22,15 @@ function CreateInstance(config: typeof defaultConfig) {
   return instance;
 }
 
+// ! class ->module 패턴으로 재 설계중 
+function CreateFetch(config: typeof defaultConfig): any {
+  const defaultConfig = config;
+  return {
+    create: (config: any) => CreateFetch(config),
+    interceptor() { },
+    get() { },
+    post() { }
+  }
+}
+
 export const woxios = CreateInstance(defaultConfig);
