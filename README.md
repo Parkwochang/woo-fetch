@@ -1,8 +1,9 @@
 # woxios
 
-<!-- [![npm version](https://img.shields.io/npm/v/gaxios.svg)](https://www.npmjs.org/package/gaxios)
-[![codecov](https://codecov.io/gh/googleapis/gaxios/branch/master/graph/badge.svg)](https://codecov.io/gh/googleapis/gaxios)
-[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts) -->
+[![npm version](https://img.shields.io/npm/v/gaxios.svg)](https://www.npmjs.org/package/woxios)
+[![Build status](https://img.shields.io/github/actions/workflow/status/axios/axios/ci.yml?branch=v1.x&label=CI&logo=github&style=flat-square)](https://github.com/Parkwochang/woo-fetch)
+<!-- [![CDNJS](https://img.shields.io/cdnjs/v/axios.svg?style=flat-square)](https://cdnjs.com/libraries/axios) -->
+
 
 > An HTTP request client that provides an `axios` like interface over top of `node-fetch`, `fetch`.
 
