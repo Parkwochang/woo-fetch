@@ -1,6 +1,6 @@
 {
   "name": "woxios",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Park chang woo <water9707@gmail.com>",
   "license": "ISC",
   "description": "Fetch library for nextjs",
