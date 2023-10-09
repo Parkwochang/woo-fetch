@@ -37,3 +37,20 @@ export function fetchAdapter(url: URL, fetchOptions: IFetchOptions) {
 }
 
 // ! 현재 필요한 것  request, reponse, error, retry, timeout
+
+//! timeout 구현 중 
+// const controller = new AbortController();
+// const timeout = setTimeout(() => {
+// 	controller.abort();
+// }, 150);
+
+// try {
+// 	const response = await fetch('https://example.com', {signal: controller.signal});
+// 	const data = await response.json();
+// } catch (error) {
+// 	if (error instanceof AbortError) {
+// 		console.log('request was aborted');
+// 	}
+// } finally {
+// 	clearTimeout(timeout);
+// }
