@@ -28,9 +28,9 @@ function CreateFetch(config: typeof defaultConfig): any {
   return {
     create: (config: any) => CreateFetch(config),
     interceptor() { },
-    get() { },
-    post() { }
-  }
+    get<T>(): Promise<T> { return Promise.resolve({} as T) },
+    post<T>() { return Promise.resolve({} as T) },
+  } as const;
 }
 
 export const woxios = CreateInstance(defaultConfig);
