@@ -23,14 +23,15 @@ function CreateInstance(config: typeof defaultConfig) {
 }
 
 // ! class ->module 패턴으로 재 설계중 
-function CreateFetch(config: typeof defaultConfig): any {
-  const defaultConfig = config;
-  return {
-    create: (config: any) => CreateFetch(config),
-    interceptor() { },
+const CreateFetch = (config: typeof defaultConfig) => {
+  const defaultConfig = { ...config } // ! private -> 밖에서 접근 불가
+
+  return Object.freeze({
+    create: (config: any) => CreateFetch({ ...defaultConfig, ...config }),
+    interceptor() { }, // ! 고민 중 
     get<T>(): Promise<T> { return Promise.resolve({} as T) },
     post<T>() { return Promise.resolve({} as T) },
-  } as const;
+  });
 }
 
 export const woxios = CreateInstance(defaultConfig);
