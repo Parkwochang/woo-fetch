@@ -16,22 +16,22 @@ const defaultConfig = {
   // signal: AbortSignal.timeout(8000), -> 가끔 에러 생김 
 };
 
-function CreateInstance(config: typeof defaultConfig) {
+function CreateInstance(config: typeof defaultConfig): NextFetch {
   const instance = new NextFetch(config);
 
   return instance;
 }
 
 // ! class ->module 패턴으로 재 설계중 
-const CreateFetch = (config: typeof defaultConfig) => {
-  const defaultConfig = { ...config } // ! private -> 밖에서 접근 불가
+// const CreateFetch = (config: typeof defaultConfig) => {
+//   const defaultConfig = { ...config } // ! private -> 밖에서 접근 불가
 
-  return Object.freeze({
-    create: (config: any) => CreateFetch({ ...defaultConfig, ...config }),
-    interceptor() { }, // ! 고민 중 
-    get<T>(): Promise<T> { return Promise.resolve({} as T) },
-    post<T>() { return Promise.resolve({} as T) },
-  });
-}
+//   return Object.freeze({
+//     create: (config: any) => CreateFetch({ ...defaultConfig, ...config }),
+//     interceptor() { }, // ! 고민 중 
+//     get<T>(): Promise<T> { return Promise.resolve({} as T) },
+//     post<T>() { return Promise.resolve({} as T) },
+//   });
+// }
 
 export const woxios = CreateInstance(defaultConfig);

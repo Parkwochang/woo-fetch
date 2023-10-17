@@ -32,7 +32,7 @@ export default class NextFetch {
   public create(config: CreateProps): NextFetch {
     const initOptions = {
       ...this.defaults,
-      signal: AbortSignal.timeout(config.timeout || 8000),
+      // signal: AbortSignal.timeout(config.timeout || 8000),
       baseUrl: config.baseUrl || '',
       ...config.header,
     }
