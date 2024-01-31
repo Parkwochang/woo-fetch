@@ -1,12 +1,4 @@
-export interface IFetchOptions {
-  method: 'get' | 'post' | 'put' | 'delete';
-  body?: BodyInit;
-  headers?: HeadersInit;
-  cache?: 'force-cache' | 'no-store' | 'no-cache';
-  next?: { revalidate: number };
-  retry?: number; // ! retry 로직 구현 필요
-  timeout?: number; // ! timeout -> signal 
-}
+import { IFetchOptions } from "../types/adapter"
 
 export class Adapter {
   static async fetch<T>(url: string, fetchOptions: IFetchOptions): Promise<T> {
@@ -27,7 +19,6 @@ export class Adapter {
 }
 
 export function fetchAdapter(url: URL, fetchOptions: IFetchOptions) {
-
 
   return new Promise((resolve, reject) => {
     fetch(url, {

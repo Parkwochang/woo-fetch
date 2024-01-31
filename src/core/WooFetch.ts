@@ -2,26 +2,17 @@ import { fetchAdapter } from './adapter';
 import Interceptor from './interceptor';
 import { transformPrams } from './utils';
 
-interface FetchOption {
-  params?: Record<string, string>;
-  body?: Blob | BufferSource | FormData /* XMLHttpRequestBodyInit | null; */;
-  headers?: RequestInit['headers'];
-  cache?: 'force-cache' | 'no-store' | 'no-cache';
-  next?: { revalidate: number };
-}
-
 interface CreateProps {
   baseUrl: string;
   timeout?: number;
-  header?: RequestInit['headers'];
+  header?: HeadersInit;
 }
 
 export default class NextFetch {
   public interceptors;
   private defaults;
 
-  // instanceConfig -> param, body 같은 값 제외하고 header 등의 정의 필요 
-  constructor(instanceConfig: any) {
+  constructor(instanceConfig: Record<string, any>) {
     this.defaults = instanceConfig;
     this.interceptors = {
       request: new Interceptor(),
@@ -79,3 +70,5 @@ export default class NextFetch {
     return await fetchAdapter(new_url, { method: 'POST', ...this.defaults, ...option })
   }
 }
+
+// ! 인터셉터, 리트라이 구현 검토 필요 
